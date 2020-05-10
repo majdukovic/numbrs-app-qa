@@ -56,12 +56,6 @@ class Page:
         :return: Element text, if element is found
         :rtype: string
         """
-        os = str(self.driver.desired_capabilities['platformName']).lower()
-        if os == 'android':
-            wait = WebDriverWait(self.driver, wait_time)
-            el = wait.until(EC.visibility_of_element_located(locator), message=":".join(locator) + " element not visible")
-            return el.get_attribute('text')
-        else:
-            wait = WebDriverWait(self.driver, wait_time)
-            el = wait.until(EC.visibility_of_element_located(locator), message=":".join(locator) + " element not visible")
-            return el.get_attribute('name')
+        wait = WebDriverWait(self.driver, wait_time)
+        el = wait.until(EC.visibility_of_element_located(locator), message=":".join(locator) + " element not visible")
+        return el.text

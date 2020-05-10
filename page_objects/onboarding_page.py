@@ -4,7 +4,7 @@ Created on May 10, 2020
 @author: Mate Ajdukovic
 """
 
-from appium.webdriver.common.mobileby import MobileBy
+from selenium.webdriver.common.by import By
 
 from page_objects.page import Page
 
@@ -14,18 +14,15 @@ class OnboardingPage(Page):
 
     def __init__(self, driver):
         super(OnboardingPage, self).__init__(driver)
-        self.os = str(self.driver.desired_capabilities['platformName']).lower()
 
-    # Android
-    login_button_android = (MobileBy.ID, 'com.centralway.numbrs:id/login_button')
+    # Locators
+    login_button = (By.ID, 'login_button')
 
-    # iOS
-    login_button_ios = (MobileBy.ACCESSIBILITY_ID, 'LOG IN')
 
     def open_login_button(self):
         """
         Click on Login button
         :return: None
         """
-        el = self.wait_for_element_present(*getattr(self, 'login_button_' + self.os))
+        el = self.wait_for_element_present(self.login_button)
         el.click()
